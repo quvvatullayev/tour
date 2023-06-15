@@ -47,5 +47,20 @@ urlpatterns += [
     path('appeal_delete/<int:id>/', AppealDelete.as_view()),
 ]
 
+from .views.commit import (
+    CommitCreate,
+    CommitList,
+    CommitDetail,
+    CommitUpdate,
+    CommitDelete,
+)
+
+urlpatterns += [
+    path('commit_list/', CommitList.as_view()),
+    path('commit_create/', CommitCreate.as_view()),
+    path('commit_detail/<int:id>/', CommitDetail.as_view()),
+    path('commit_update/<int:id>/', CommitUpdate.as_view()),
+    path('commit_delete/<int:id>/', CommitDelete.as_view()),
+]
 
 
