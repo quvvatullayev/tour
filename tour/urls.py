@@ -95,4 +95,11 @@ urlpatterns += [
     path('exclusive_delete/<int:id>/', ExclusiveDelete.as_view()),
 ]
 
+from .views.home import (
+    HomeViews,
+)
+
+urlpatterns += [
+    path('home/', HomeViews.as_view()),
+]
 
