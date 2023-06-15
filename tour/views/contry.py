@@ -37,22 +37,19 @@ class CountryDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CountryUpdate(APIView):
-    def put(self, request:Request, id):
+    def post(self, request:Request, id):
+        data = request.data
         country = Country.objects.get(id=id)
-        serializer = CountrySerializer(country, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        return Response(
-            {
-                'error': serializer.errors,
-                'message': 'Invalid data'
-            },
-            status=status.HTTP_400_BAD_REQUEST
-        )
+        country.name = data.get('name', country.name)
+        country.discription = data.get('discription', country.discription)
+        country.youtube_url = data.get('youtube_url', country.youtube_url)
+        country.save()
+        serializer = CountrySerializer(country)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
     
 class CountryDelete(APIView):
-    def delete(self, request:Request, id):
+    def post(self, request:Request, id):
         country = Country.objects.get(id=id)
         country.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Deleted'}, status=status.HTTP_200_OK)
