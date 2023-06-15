@@ -1,8 +1,7 @@
-from typing import Any
 from django.db import models
 
 class Country(models.Model):
-    name = models.TextField(max_length=25)
+    name = models.TextField()
     discription = models.CharField(max_length=5000)
     youtube_url = models.CharField(max_length=50)
 
@@ -10,7 +9,7 @@ class Country(models.Model):
         return self.name
     
 class Exclusive(models.Model):
-    name = models.TextField(max_length=50)
+    name = models.TextField()
     price = models.IntegerField()
     duration = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True, blank=True)
@@ -30,23 +29,23 @@ class News(models.Model):
     discription = models.CharField(max_length=5000)
     created = models.DateTimeField(auto_now_add=True, blank=True)
     img = models.ImageField('/news_imgs')
-    appeal = models.CharField()
+    appeal = models.CharField(max_length=5000)
 
     def __str__(self) -> str:
         return self.name
     
 class Commit(models.Model):
-    name = models.TextField(max_length=50)
+    name = models.TextField()
     discription = models.CharField(max_length=5000)
 
     def __str__(self) -> str:
         return self.name
     
 class Appeal(models.Model):
-    name = models.TextField(max_length=20)
+    name = models.TextField()
     phone_number = models.CharField(max_length=30)
     emile = models.EmailField()
-    message = models.TextField(max_length=5000)
+    message = models.TextField()
     title = models.CharField(max_length=50)
 
     def __str__(self) -> str:

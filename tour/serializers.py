@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import (
+    Country,
     Exclusive,
     About_company,
     News,
@@ -8,6 +9,11 @@ from .models import (
     Contact,
     User,
 )
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'
 
 class ExclusiveSerializer(serializers.ModelSerializer):
     class Meta:
