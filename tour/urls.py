@@ -14,3 +14,19 @@ urlpatterns = [
     path('country_update/<int:id>/', CountryUpdate.as_view()),
     path('country_delete/<int:id>/', CountryDelete.as_view()),
 ]
+
+from .views.about_company import (
+    About_companyCreate,
+    About_companyList,
+    About_companyDetail,
+    About_companyUpdate,
+    About_companyDelete,
+)
+
+urlpatterns += [
+    path('about_company_list/', About_companyList.as_view()),
+    path('about_company_create/', About_companyCreate.as_view()),
+    path('about_company_detail/<int:id>/', About_companyDetail.as_view()),
+    path('about_company_update/<int:id>/', About_companyUpdate.as_view()),
+    path('about_company_delete/<int:id>/', About_companyDelete.as_view()),
+]
