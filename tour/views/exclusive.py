@@ -33,8 +33,16 @@ class ExclusiveList(APIView):
 class ExclusiveDetail(APIView):
     def get(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
+        exclusives = Exclusive.objects.all()
         serializer = ExclusiveSerializer(exclusive)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        serializers = ExclusiveSerializer(exclusives, many=True)
+        return Response(
+            {
+                'exclusive': serializer.data,
+                'exclusives': serializers.data,
+            },
+            status=status.HTTP_200_OK
+        )
     
 class ExclusiveUpdate(APIView):
     def post(self, request:Request, id):
