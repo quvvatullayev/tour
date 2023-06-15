@@ -30,3 +30,22 @@ urlpatterns += [
     path('about_company_update/<int:id>/', About_companyUpdate.as_view()),
     path('about_company_delete/<int:id>/', About_companyDelete.as_view()),
 ]
+
+from .views.appeal import (
+    AppealCreate,
+    AppealList,
+    AppealDetail,
+    AppealUpdate,
+    AppealDelete,
+)
+
+urlpatterns += [
+    path('appeal_list/', AppealList.as_view()),
+    path('appeal_create/', AppealCreate.as_view()),
+    path('appeal_detail/<int:id>/', AppealDetail.as_view()),
+    path('appeal_update/<int:id>/', AppealUpdate.as_view()),
+    path('appeal_delete/<int:id>/', AppealDelete.as_view()),
+]
+
+
+
