@@ -4,9 +4,11 @@ from rest_framework.request import Request
 from rest_framework import status
 from ..models import (
     News,
+    Contact,
 )
 from ..serializers import (
     NewsSerializer,
+    ContactSerializer,
 )
 
 class NewsCreate(APIView):
@@ -33,8 +35,16 @@ class NewsList(APIView):
 class NewsDetail(APIView):
     def get(self, request:Request, id):
         news = News.objects.get(id=id)
+        contacts = Contact.objects.all()
         serializer = NewsSerializer(news)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        contact_serializer = ContactSerializer(contacts, many=True)
+        return Response(
+            {
+                'news': serializer.data,
+                'contacts': contact_serializer.data,
+            },
+            status=status.HTTP_200_OK
+        )
     
 class NewsUpdate(APIView):
     def post(self, request:Request, id):
