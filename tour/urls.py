@@ -103,3 +103,11 @@ urlpatterns += [
     path('home/', HomeViews.as_view()),
 ]
 
+from .views.search import (
+    Search,
+)
+
+urlpatterns += [
+    path('search/', Search.as_view()),
+]
+
