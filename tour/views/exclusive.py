@@ -4,9 +4,11 @@ from rest_framework.request import Request
 from rest_framework import status
 from ..models import (
     Exclusive,
+    Contact,
 )
 from ..serializers import (
     ExclusiveSerializer,
+    ContactSerializer,
 )
 
 class ExclusiveCreate(APIView):
@@ -34,12 +36,15 @@ class ExclusiveDetail(APIView):
     def get(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
         exclusives = Exclusive.objects.all()
+        contacts = Contact.objects.all()
         serializer = ExclusiveSerializer(exclusive)
         serializers = ExclusiveSerializer(exclusives, many=True)
+        contact_serializer = ContactSerializer(contacts, many=True)
         return Response(
             {
                 'exclusive': serializer.data,
                 'exclusives': serializers.data,
+                'contacts': contact_serializer.data,
             },
             status=status.HTTP_200_OK
         )
