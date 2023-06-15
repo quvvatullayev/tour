@@ -63,4 +63,20 @@ urlpatterns += [
     path('commit_delete/<int:id>/', CommitDelete.as_view()),
 ]
 
+from .views.contact import (
+    ContactCreate,
+    ContactList,
+    ContactDetail,
+    ContactUpdate,
+    ContactDelete,
+)
+
+urlpatterns += [
+    path('contact_list/', ContactList.as_view()),
+    path('contact_create/', ContactCreate.as_view()),
+    path('contact_detail/<int:id>/', ContactDetail.as_view()),
+    path('contact_update/<int:id>/', ContactUpdate.as_view()),
+    path('contact_delete/<int:id>/', ContactDelete.as_view()),
+]
+
 
