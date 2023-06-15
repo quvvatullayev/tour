@@ -79,4 +79,20 @@ urlpatterns += [
     path('contact_delete/<int:id>/', ContactDelete.as_view()),
 ]
 
+from .views.exclusive import (
+    ExclusiveCreate,
+    ExclusiveList,
+    ExclusiveDetail,
+    ExclusiveUpdate,
+    ExclusiveDelete,
+)
+
+urlpatterns += [
+    path('exclusive_list/', ExclusiveList.as_view()),
+    path('exclusive_create/', ExclusiveCreate.as_view()),
+    path('exclusive_detail/<int:id>/', ExclusiveDetail.as_view()),
+    path('exclusive_update/<int:id>/', ExclusiveUpdate.as_view()),
+    path('exclusive_delete/<int:id>/', ExclusiveDelete.as_view()),
+]
+
 
