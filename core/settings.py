@@ -131,6 +131,7 @@ STATIC_URL = 'static/'
 # Collect static
 COLLECT_STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 COLLECT_STATIC = True
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
