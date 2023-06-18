@@ -84,14 +84,6 @@ DATABASES = {
     }
 }
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.BasicAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#     ]
-# }
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -136,7 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_URL = '/static/'
+# Collect static
+COLLECT_STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+COLLECT_STATIC = True
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
