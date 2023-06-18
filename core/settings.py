@@ -94,7 +94,7 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    '/home/ogabek/github/tour/static',
+    os.path.join(BASE_DIR, 'static')
 ]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
