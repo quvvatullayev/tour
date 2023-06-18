@@ -2,7 +2,7 @@
 
 # Base url : <a href="https://tourbackend.pythonanywhere.com"> `https://tourbackend.pythonanywhere.com/`</a>
 
-# Base Documentations : <a href = 'https://tourbackend.pythonanywhere.com/api/vi/swagger/'>`https://tourbackend.pythonanywhere.com/api/vi/swagger/`</a>
+<!--# Base Documentations : <a href = 'https://tourbackend.pythonanywhere.com/api/vi/swagger/'>`https://tourbackend.pythonanywhere.com/api/vi/swagger/`</a>-->
 
 # Data base img
 
