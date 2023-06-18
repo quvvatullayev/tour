@@ -1,5 +1,9 @@
 requests
 django
 djangorestframework
-django-cors-headers 
+django-cors-headers
+django-rest-swagger
 Pillow
+pyyaml
+uritemplate
+drf-yasg
