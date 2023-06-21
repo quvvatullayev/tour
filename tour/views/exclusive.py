@@ -29,14 +29,20 @@ class ExclusiveCreate(APIView):
         )
     
 class ExclusiveList(APIView):
-    @swagger_auto_schema(operation_description="Get Exclusive list")
+    @swagger_auto_schema(
+            operation_description="Get Exclusive list",
+            responses={200: ExclusiveSerializer(many=True)}
+            )
     def get(self, request:Request):
         exclusives = Exclusive.objects.all()
         serializer = ExclusiveSerializer(exclusives, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ExclusiveDetail(APIView):
-    @swagger_auto_schema(operation_description="Get Exclusive detail")
+    @swagger_auto_schema(
+            operation_description="Get Exclusive detail",
+            responses={200: ExclusiveSerializer()}
+            )
     def get(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
         exclusives = Exclusive.objects.all()

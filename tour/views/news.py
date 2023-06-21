@@ -29,14 +29,20 @@ class NewsCreate(APIView):
         )
     
 class NewsList(APIView):
-    @swagger_auto_schema(operation_description="Get News list")
+    @swagger_auto_schema(
+            operation_description="Get News list",
+            responses={200: NewsSerializer(many=True)}
+            )
     def get(self, request:Request):
         news = News.objects.all()
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class NewsDetail(APIView):
-    @swagger_auto_schema(operation_description="Get News detail")
+    @swagger_auto_schema(
+            operation_description="Get News detail",
+            responses={200: NewsSerializer()}
+            )
     def get(self, request:Request, id):
         news = News.objects.get(id=id)
         contacts = Contact.objects.all()

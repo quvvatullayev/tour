@@ -27,14 +27,20 @@ class About_companyCreate(APIView):
         )
     
 class About_companyList(APIView):
-    @swagger_auto_schema(operation_description="Get About_company list")
+    @swagger_auto_schema(
+            operation_description="Get About_company list",
+            responses={200: About_companySerializer(many=True)}
+            )
     def get(self, request:Request):
         about_companys = About_company.objects.all()
         serializer = About_companySerializer(about_companys, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyDetail(APIView):
-    @swagger_auto_schema(operation_description="Get About_company detail")
+    @swagger_auto_schema(
+            operation_description="Get About_company detail",
+            responses={200: About_companySerializer()}
+            )
     def get(self, request:Request, id):
         about_company = About_company.objects.get(id=id)
         serializer = About_companySerializer(about_company)

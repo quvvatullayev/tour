@@ -27,14 +27,20 @@ class CountryCreate(APIView):
         )
     
 class CountryList(APIView):
-    @swagger_auto_schema(operation_description="Get Country list")
+    @swagger_auto_schema(
+            operation_description="Get Country list",
+            responses={200: CountrySerializer(many=True)}
+            )
     def get(self, request:Request):
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CountryDetail(APIView):
-    @swagger_auto_schema(operation_description="Get Country detail")
+    @swagger_auto_schema(
+            operation_description="Get Country detail",
+            responses={200: CountrySerializer()}
+            )
     def get(self, request:Request, id):
         country = Country.objects.get(id=id)
         serializer = CountrySerializer(country)

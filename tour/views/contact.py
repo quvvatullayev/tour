@@ -27,14 +27,20 @@ class ContactCreate(APIView):
         )
     
 class ContactList(APIView):
-    @swagger_auto_schema(operation_description="Get Contact list")
+    @swagger_auto_schema(
+        operation_description="Get Contact list",
+        responses={200: ContactSerializer(many=True)}
+        )
     def get(self, request:Request):
         contacts = Contact.objects.all()
         serializer = ContactSerializer(contacts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactDetail(APIView):
-    @swagger_auto_schema(operation_description="Get Contact detail")
+    @swagger_auto_schema(
+            operation_description="Get Contact detail",
+            responses={200: ContactSerializer()}
+            )
     def get(self, request:Request, id):
         contact = Contact.objects.get(id=id)
         serializer = ContactSerializer(contact)

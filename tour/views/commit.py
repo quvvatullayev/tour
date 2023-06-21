@@ -27,14 +27,20 @@ class CommitCreate(APIView):
         )
     
 class CommitList(APIView):
-    @swagger_auto_schema(operation_description="Get Commit list")
+    @swagger_auto_schema(
+            operation_description="Get Commit list",
+            responses={200: CommitSerializer(many=True)}
+            )
     def get(self, request:Request):
         commits = Commit.objects.all()
         serializer = CommitSerializer(commits, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CommitDetail(APIView):
-    @swagger_auto_schema(operation_description="Get Commit detail")
+    @swagger_auto_schema(
+            operation_description="Get Commit detail",
+            responses={200: CommitSerializer()}
+            )
     def get(self, request:Request, id):
         commit = Commit.objects.get(id=id)
         serializer = CommitSerializer(commit)

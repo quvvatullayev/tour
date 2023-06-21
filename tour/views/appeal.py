@@ -27,14 +27,20 @@ class AppealCreate(APIView):
         )
     
 class AppealList(APIView):
-    @swagger_auto_schema(operation_description="Get Appeal list")
+    @swagger_auto_schema(
+            operation_description="Get Appeal list",
+            responses={200: AppealSerializer(many=True)}
+            )
     def get(self, request:Request):
         appeals = Appeal.objects.all()
         serializer = AppealSerializer(appeals, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealDetail(APIView):
-    @swagger_auto_schema(operation_description="Get Appeal detail")
+    @swagger_auto_schema(
+            operation_description="Get Appeal detail",
+            responses={200: AppealSerializer()}
+            )
     def get(self, request:Request, id):
         appeal = Appeal.objects.get(id=id)
         serializer = AppealSerializer(appeal)

@@ -27,14 +27,20 @@ class UserCreate(APIView):
         )
     
 class UserList(APIView):
-    @swagger_auto_schema(operation_description="Get User list")
+    @swagger_auto_schema(
+            operation_description="Get User list",
+            responses={200: UserSerializer(many=True)}
+            )
     def get(self, request:Request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UserDetail(APIView):
-    @swagger_auto_schema(operation_description="Get User detail")
+    @swagger_auto_schema(
+            operation_description="Get User detail",
+            responses={200: UserSerializer()}
+            )
     def get(self, request:Request, id):
         user = User.objects.get(id=id)
         serializer = UserSerializer(user)
