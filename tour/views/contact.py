@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Contact,
 )
@@ -10,6 +11,7 @@ from ..serializers import (
 )
 
 class ContactCreate(APIView):
+    @swagger_auto_schema(operation_description="Create Contact")
     def post(self, request:Request):
         data = request.data
         serializer = ContactSerializer(data=data)
@@ -25,18 +27,21 @@ class ContactCreate(APIView):
         )
     
 class ContactList(APIView):
+    @swagger_auto_schema(operation_description="Get Contact list")
     def get(self, request:Request):
         contacts = Contact.objects.all()
         serializer = ContactSerializer(contacts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactDetail(APIView):
+    @swagger_auto_schema(operation_description="Get Contact detail")
     def get(self, request:Request, id):
         contact = Contact.objects.get(id=id)
         serializer = ContactSerializer(contact)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update Contact")
     def post(self, request:Request, id):
         data = request.data
         contact = Contact.objects.get(id=id)
@@ -52,6 +57,7 @@ class ContactUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete Contact")
     def post(self, request:Request, id):
         contact = Contact.objects.get(id=id)
         contact.delete()

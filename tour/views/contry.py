@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Country,
 )
@@ -10,6 +11,7 @@ from ..serializers import (
 )
 
 class CountryCreate(APIView):
+    @swagger_auto_schema(operation_description="Create Country")
     def post(self, request:Request):
         data = request.data
         serializer = CountrySerializer(data=data)
@@ -25,18 +27,21 @@ class CountryCreate(APIView):
         )
     
 class CountryList(APIView):
+    @swagger_auto_schema(operation_description="Get Country list")
     def get(self, request:Request):
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CountryDetail(APIView):
+    @swagger_auto_schema(operation_description="Get Country detail")
     def get(self, request:Request, id):
         country = Country.objects.get(id=id)
         serializer = CountrySerializer(country)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CountryUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update Country")
     def post(self, request:Request, id):
         data = request.data
         country = Country.objects.get(id=id)
@@ -49,6 +54,7 @@ class CountryUpdate(APIView):
         
     
 class CountryDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete Country")
     def post(self, request:Request, id):
         country = Country.objects.get(id=id)
         country.delete()

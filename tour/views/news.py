@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     News,
     Contact,
@@ -12,6 +13,7 @@ from ..serializers import (
 )
 
 class NewsCreate(APIView):
+    @swagger_auto_schema(operation_description="Create News")
     def post(self, request:Request):
         data = request.data
         serializer = NewsSerializer(data=data)
@@ -27,12 +29,14 @@ class NewsCreate(APIView):
         )
     
 class NewsList(APIView):
+    @swagger_auto_schema(operation_description="Get News list")
     def get(self, request:Request):
         news = News.objects.all()
         serializer = NewsSerializer(news, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class NewsDetail(APIView):
+    @swagger_auto_schema(operation_description="Get News detail")
     def get(self, request:Request, id):
         news = News.objects.get(id=id)
         contacts = Contact.objects.all()
@@ -47,6 +51,7 @@ class NewsDetail(APIView):
         )
     
 class NewsUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update News")
     def post(self, request:Request, id):
         data = request.data
         news = News.objects.get(id=id)
@@ -60,6 +65,7 @@ class NewsUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class NewsDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete News")
     def post(self, request:Request, id):
         news = News.objects.get(id=id)
         news.delete()

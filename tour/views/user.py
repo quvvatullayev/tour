@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     User,
 )
@@ -10,6 +11,7 @@ from ..serializers import (
 )
 
 class UserCreate(APIView):
+    @swagger_auto_schema(operation_description="Create User")
     def post(self, request:Request):
         data = request.data
         serializer = UserSerializer(data=data)
@@ -25,18 +27,21 @@ class UserCreate(APIView):
         )
     
 class UserList(APIView):
+    @swagger_auto_schema(operation_description="Get User list")
     def get(self, request:Request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UserDetail(APIView):
+    @swagger_auto_schema(operation_description="Get User detail")
     def get(self, request:Request, id):
         user = User.objects.get(id=id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class UserUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update User")
     def post(self, request:Request, id):
         data = request.data
         user = User.objects.get(id=id)
@@ -48,6 +53,7 @@ class UserUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class UserDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete User")
     def post(self, request:Request, id):
         user = User.objects.get(id=id)
         user.delete()

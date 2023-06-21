@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     About_company,
 )
@@ -10,6 +11,7 @@ from ..serializers import (
 )
 
 class About_companyCreate(APIView):
+    @swagger_auto_schema(operation_description="Create About_company")
     def post(self, request:Request):
         data = request.data
         serializer = About_companySerializer(data=data)
@@ -25,18 +27,21 @@ class About_companyCreate(APIView):
         )
     
 class About_companyList(APIView):
+    @swagger_auto_schema(operation_description="Get About_company list")
     def get(self, request:Request):
         about_companys = About_company.objects.all()
         serializer = About_companySerializer(about_companys, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyDetail(APIView):
+    @swagger_auto_schema(operation_description="Get About_company detail")
     def get(self, request:Request, id):
         about_company = About_company.objects.get(id=id)
         serializer = About_companySerializer(about_company)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update About_company")
     def post(self, request:Request, id):
         data = request.data
         about_company = About_company.objects.get(id=id)
@@ -47,6 +52,7 @@ class About_companyUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete About_company")
     def post(self, request:Request, id):
         about_company = About_company.objects.get(id=id)
         about_company.delete()

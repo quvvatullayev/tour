@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Appeal,
 )
@@ -10,6 +11,7 @@ from ..serializers import (
 )
 
 class AppealCreate(APIView):
+    @swagger_auto_schema(operation_description="Create Appeal")
     def post(self, request:Request):
         data = request.data
         serializer = AppealSerializer(data=data)
@@ -25,18 +27,21 @@ class AppealCreate(APIView):
         )
     
 class AppealList(APIView):
+    @swagger_auto_schema(operation_description="Get Appeal list")
     def get(self, request:Request):
         appeals = Appeal.objects.all()
         serializer = AppealSerializer(appeals, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealDetail(APIView):
+    @swagger_auto_schema(operation_description="Get Appeal detail")
     def get(self, request:Request, id):
         appeal = Appeal.objects.get(id=id)
         serializer = AppealSerializer(appeal)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update Appeal")
     def post(self, request:Request, id):
         data = request.data
         appeal = Appeal.objects.get(id=id)
@@ -50,6 +55,7 @@ class AppealUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete Appeal")
     def post(self, request:Request, id):
         appeal = Appeal.objects.get(id=id)
         appeal.delete()

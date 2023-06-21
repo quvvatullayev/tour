@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Country,
     Exclusive,
@@ -24,6 +25,7 @@ from ..serializers import (
 )
 
 class HomeViews(APIView):
+    @swagger_auto_schema(operation_description="Get Home")
     def get(self, request:Request):
         countries = Country.objects.all()
         exclusives = Exclusive.objects.all()

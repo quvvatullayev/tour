@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
 from ..models import (
     Exclusive,
     Contact,
@@ -12,6 +13,7 @@ from ..serializers import (
 )
 
 class ExclusiveCreate(APIView):
+    @swagger_auto_schema(operation_description="Create Exclusive")
     def post(self, request:Request):
         data = request.data
         serializer = ExclusiveSerializer(data=data)
@@ -27,12 +29,14 @@ class ExclusiveCreate(APIView):
         )
     
 class ExclusiveList(APIView):
+    @swagger_auto_schema(operation_description="Get Exclusive list")
     def get(self, request:Request):
         exclusives = Exclusive.objects.all()
         serializer = ExclusiveSerializer(exclusives, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ExclusiveDetail(APIView):
+    @swagger_auto_schema(operation_description="Get Exclusive detail")
     def get(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
         exclusives = Exclusive.objects.all()
@@ -50,6 +54,7 @@ class ExclusiveDetail(APIView):
         )
     
 class ExclusiveUpdate(APIView):
+    @swagger_auto_schema(operation_description="Update Exclusive")
     def post(self, request:Request, id):
         data = request.data
         exclusive = Exclusive.objects.get(id=id)
@@ -61,6 +66,7 @@ class ExclusiveUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ExclusiveDelete(APIView):
+    @swagger_auto_schema(operation_description="Delete Exclusive")
     def post(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
         exclusive.delete()
