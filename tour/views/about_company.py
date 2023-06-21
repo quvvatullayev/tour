@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class About_companyCreate(APIView):
-    @swagger_auto_schema(operation_description="Create About_company")
+    @swagger_auto_schema(operation_description="Create About_company", request_body=About_companySerializer)
     def post(self, request:Request):
         data = request.data
         serializer = About_companySerializer(data=data)
@@ -41,7 +41,7 @@ class About_companyDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update About_company")
+    @swagger_auto_schema(operation_description="Update About_company", request_body=About_companySerializer)
     def post(self, request:Request, id):
         data = request.data
         about_company = About_company.objects.get(id=id)
@@ -52,7 +52,7 @@ class About_companyUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class About_companyDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete About_company")
+    @swagger_auto_schema(operation_description="Delete About_company", request_body=About_companySerializer)
     def post(self, request:Request, id):
         about_company = About_company.objects.get(id=id)
         about_company.delete()

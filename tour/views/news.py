@@ -13,7 +13,7 @@ from ..serializers import (
 )
 
 class NewsCreate(APIView):
-    @swagger_auto_schema(operation_description="Create News")
+    @swagger_auto_schema(operation_description="Create News", request_body=NewsSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = NewsSerializer(data=data)
@@ -51,7 +51,7 @@ class NewsDetail(APIView):
         )
     
 class NewsUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update News")
+    @swagger_auto_schema(operation_description="Update News", request_body=NewsSerializer)
     def post(self, request:Request, id):
         data = request.data
         news = News.objects.get(id=id)
@@ -65,7 +65,7 @@ class NewsUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class NewsDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete News")
+    @swagger_auto_schema(operation_description="Delete News", request_body=NewsSerializer)
     def post(self, request:Request, id):
         news = News.objects.get(id=id)
         news.delete()

@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class CountryCreate(APIView):
-    @swagger_auto_schema(operation_description="Create Country")
+    @swagger_auto_schema(operation_description="Create Country", request_body=CountrySerializer)
     def post(self, request:Request):
         data = request.data
         serializer = CountrySerializer(data=data)
@@ -41,7 +41,7 @@ class CountryDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CountryUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update Country")
+    @swagger_auto_schema(operation_description="Update Country", request_body=CountrySerializer)
     def post(self, request:Request, id):
         data = request.data
         country = Country.objects.get(id=id)
@@ -54,7 +54,7 @@ class CountryUpdate(APIView):
         
     
 class CountryDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete Country")
+    @swagger_auto_schema(operation_description="Delete Country", request_body=CountrySerializer)
     def post(self, request:Request, id):
         country = Country.objects.get(id=id)
         country.delete()

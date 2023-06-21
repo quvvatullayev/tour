@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class UserCreate(APIView):
-    @swagger_auto_schema(operation_description="Create User")
+    @swagger_auto_schema(operation_description="Create User", request_body=UserSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = UserSerializer(data=data)
@@ -41,7 +41,7 @@ class UserDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class UserUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update User")
+    @swagger_auto_schema(operation_description="Update User", request_body=UserSerializer)
     def post(self, request:Request, id):
         data = request.data
         user = User.objects.get(id=id)
@@ -53,7 +53,7 @@ class UserUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class UserDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete User")
+    @swagger_auto_schema(operation_description="Delete User", request_body=UserSerializer)
     def post(self, request:Request, id):
         user = User.objects.get(id=id)
         user.delete()

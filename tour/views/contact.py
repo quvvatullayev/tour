@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class ContactCreate(APIView):
-    @swagger_auto_schema(operation_description="Create Contact")
+    @swagger_auto_schema(operation_description="Create Contact", request_body=ContactSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = ContactSerializer(data=data)
@@ -41,7 +41,7 @@ class ContactDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update Contact")
+    @swagger_auto_schema(operation_description="Update Contact", request_body=ContactSerializer)
     def post(self, request:Request, id):
         data = request.data
         contact = Contact.objects.get(id=id)
@@ -57,7 +57,7 @@ class ContactUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ContactDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete Contact")
+    @swagger_auto_schema(operation_description="Delete Contact", request_body=ContactSerializer)
     def post(self, request:Request, id):
         contact = Contact.objects.get(id=id)
         contact.delete()

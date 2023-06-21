@@ -13,7 +13,7 @@ from ..serializers import (
 )
 
 class ExclusiveCreate(APIView):
-    @swagger_auto_schema(operation_description="Create Exclusive")
+    @swagger_auto_schema(operation_description="Create Exclusive", request_body=ExclusiveSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = ExclusiveSerializer(data=data)
@@ -54,7 +54,7 @@ class ExclusiveDetail(APIView):
         )
     
 class ExclusiveUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update Exclusive")
+    @swagger_auto_schema(operation_description="Update Exclusive", request_body=ExclusiveSerializer)
     def post(self, request:Request, id):
         data = request.data
         exclusive = Exclusive.objects.get(id=id)
@@ -66,7 +66,7 @@ class ExclusiveUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ExclusiveDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete Exclusive")
+    @swagger_auto_schema(operation_description="Delete Exclusive", request_body=ExclusiveSerializer)
     def post(self, request:Request, id):
         exclusive = Exclusive.objects.get(id=id)
         exclusive.delete()

@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class CommitCreate(APIView):
-    @swagger_auto_schema(operation_description="Create Commit")
+    @swagger_auto_schema(operation_description="Create Commit", request_body=CommitSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = CommitSerializer(data=data)
@@ -41,7 +41,7 @@ class CommitDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CommitUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update Commit")
+    @swagger_auto_schema(operation_description="Update Commit", request_body=CommitSerializer)
     def post(self, request:Request, id):
         data = request.data
         commit = Commit.objects.get(id=id)
@@ -52,7 +52,7 @@ class CommitUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class CommitDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete Commit")
+    @swagger_auto_schema(operation_description="Delete Commit", request_body=CommitSerializer)
     def post(self, request:Request, id):
         commit = Commit.objects.get(id=id)
         commit.delete()

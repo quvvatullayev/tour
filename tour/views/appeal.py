@@ -11,7 +11,7 @@ from ..serializers import (
 )
 
 class AppealCreate(APIView):
-    @swagger_auto_schema(operation_description="Create Appeal")
+    @swagger_auto_schema(operation_description="Create Appeal", request_body=AppealSerializer)
     def post(self, request:Request):
         data = request.data
         serializer = AppealSerializer(data=data)
@@ -41,7 +41,7 @@ class AppealDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealUpdate(APIView):
-    @swagger_auto_schema(operation_description="Update Appeal")
+    @swagger_auto_schema(operation_description="Update Appeal", request_body=AppealSerializer)
     def post(self, request:Request, id):
         data = request.data
         appeal = Appeal.objects.get(id=id)
@@ -55,7 +55,7 @@ class AppealUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class AppealDelete(APIView):
-    @swagger_auto_schema(operation_description="Delete Appeal")
+    @swagger_auto_schema(operation_description="Delete Appeal", request_body=AppealSerializer)
     def post(self, request:Request, id):
         appeal = Appeal.objects.get(id=id)
         appeal.delete()
