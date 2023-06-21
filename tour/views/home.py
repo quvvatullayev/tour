@@ -84,7 +84,7 @@ class HomeViews(APIView):
                         ],
                     }
                 }
-            }
+                }
             ),
             }
             )
