@@ -27,7 +27,7 @@ class About_company(models.Model):
 class News(models.Model):
     name = models.CharField(max_length=20)
     discription = models.CharField(max_length=5000)
-    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
     img = models.ImageField('/news_imgs')
     appeal = models.CharField(max_length=5000)
 
