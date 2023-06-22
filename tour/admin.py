@@ -17,8 +17,8 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(Exclusive)
 class ExclusiveAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'duration', 'created']
-    fields = ['name', 'price', 'duration', 'created']
+    list_display = ['name', 'price', 'duration']
+    fields = ['name', 'price', 'duration']
 
 @admin.register(About_company)
 class About_companyAdmin(admin.ModelAdmin):
@@ -27,8 +27,8 @@ class About_companyAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['name', 'discription', 'created', 'img', 'appeal']
-    fields = ['name', 'discription', 'created', 'img', 'appeal']
+    list_display = ['name', 'discription', 'img', 'appeal']
+    fields = ['name', 'discription', 'img', 'appeal']
 
 @admin.register(Commit)
 class CommitAdmin(admin.ModelAdmin):

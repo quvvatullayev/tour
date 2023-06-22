@@ -12,7 +12,7 @@ class Exclusive(models.Model):
     name = models.TextField()
     price = models.IntegerField()
     duration = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null = True)
 
     def __str__(self) -> str:
         return self.name
@@ -27,7 +27,7 @@ class About_company(models.Model):
 class News(models.Model):
     name = models.CharField(max_length=20)
     discription = models.CharField(max_length=5000)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True, null = True)
     img = models.ImageField('/news_imgs')
     appeal = models.CharField(max_length=5000)
 
