@@ -12,7 +12,7 @@ class Exclusive(models.Model):
     name = models.TextField()
     price = models.IntegerField()
     duration = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.name
