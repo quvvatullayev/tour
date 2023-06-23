@@ -7,9 +7,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-# from ..models import (
-#     User_model,
-# )
+from drf_yasg import openapi
 from ..serializers import (
     UserSerializer,
 )
@@ -17,8 +15,22 @@ from ..serializers import (
 class CreateUser(APIView):
     @swagger_auto_schema(
         operation_description="Create a new user",
-        request_body=UserSerializer,
-        responses={200: UserSerializer}
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                'password': openapi.Schema(type=openapi.TYPE_STRING),
+            }
+        ),
+        responses={200: openapi.Response(
+            description="Successful response",
+            content={'application/json': {
+                'example': {
+                    'token': 'f7a2a3e0a4f0b0d6c2e6d2b8a1b7f6d2b8a1b7f6'
+                }
+            }}
+        )
+        }
     )
     def post(self, request: Request) -> Response:
         serializer = UserSerializer(data=request.data)
@@ -32,8 +44,30 @@ class LoginUser(APIView):
     permission_classes = [IsAuthenticated]
     @swagger_auto_schema(
         operation_description="Login user",
-        request_body=UserSerializer,
-        responses={200: UserSerializer}
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                # basic auth
+                'basic': {
+                    'type': openapi.TYPE_OBJECT,
+                    'properties': {
+                        'username': openapi.Schema(type=openapi.TYPE_STRING),
+                        'password': openapi.Schema(type=openapi.TYPE_STRING),
+                    }
+                }
+
+            }
+        ),
+        responses={200: openapi.Response(
+            description="Successful response",
+            content={'application/json': {
+                'example': {
+                    'token': 'f7a2a3e0a4f0b0d6c2e6d2b8a1b7f6d2b8a1b7f6'
+                }
+            }}
+        )
+
+    }
     )
     def post(self, request: Request) -> Response:
         user = request.user
@@ -49,8 +83,21 @@ class LogoutUser(APIView):
     authentication_classes = [TokenAuthentication]
     @swagger_auto_schema(
         operation_description="Logout user",
-        request_body=UserSerializer,
-        responses={200: UserSerializer}
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'token': openapi.Schema(type=openapi.TYPE_STRING),
+
+            }
+        ),
+        responses={200: openapi.Response(
+        description="Successful response",
+        content={'application/json': {
+            'example': {
+                'message': 'User logout'
+            }
+        }}
+        )}
     )
     def post(self, request: Request) -> Response:
         user = request.user
