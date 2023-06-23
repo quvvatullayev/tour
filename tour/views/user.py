@@ -43,3 +43,20 @@ class LoginUser(APIView):
             return Response({"token": user_token[0].key})
 
         return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+class LogoutUser(APIView):
+    # cheak token
+    authentication_classes = [TokenAuthentication]
+    @swagger_auto_schema(
+        operation_description="Logout user",
+        request_body=UserSerializer,
+        responses={200: UserSerializer}
+    )
+    def post(self, request: Request) -> Response:
+        user = request.user
+        if user:
+            # get token
+            user_token = Token.objects.get(user=user)
+            user_token.delete()
+            return Response({"message": "User logout"})
+        return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
