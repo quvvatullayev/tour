@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Country(models.Model):
     name = models.TextField()
@@ -63,11 +64,9 @@ class Contact(models.Model):
     def __str__(self) -> str:
         return self.area
     
-class User(models.Model):
-    name = models.CharField(max_length=50)
-    emile = models.EmailField()
-    phone_number = models.CharField(max_length=30)
-    check_admin = models.BooleanField(default=False)
+class User(User):
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        return self.name
+        return self.username

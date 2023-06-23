@@ -47,7 +47,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['name', 'emile', 'phone_number', 'check_admin']
-    fields = ['name', 'emile', 'phone_number', 'check_admin']
+    list_display = ['username', 'password']
+    fields = ['username', 'password']
 
     
