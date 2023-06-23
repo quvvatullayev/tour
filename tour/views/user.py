@@ -5,6 +5,7 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 # from ..models import (
 #     User_model,
@@ -20,9 +21,10 @@ class CreateUser(APIView):
         responses={200: UserSerializer}
     )
     def post(self, request: Request) -> Response:
-        print(request.data)
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            user_token = Token.objects.create(user=serializer.instance)
+            return Response({"token": user_token.key})
         return Response(serializer.errors)
+    
