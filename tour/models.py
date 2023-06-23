@@ -64,9 +64,9 @@ class Contact(models.Model):
     def __str__(self) -> str:
         return self.area
     
-class User(User):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
+# class User_model(User):
+#     username = models.CharField(max_length=50)
+#     password = models.CharField(max_length=50)
 
-    def __str__(self) -> str:
-        return self.username
+#     def __str__(self) -> str:
+#         return self.username

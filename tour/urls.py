@@ -111,3 +111,11 @@ urlpatterns += [
     path('search/', Search.as_view()),
 ]
 
+from .views.user import (
+    CreateUser,
+)
+
+urlpatterns += [
+    path('user_create/', CreateUser.as_view()),
+]
+

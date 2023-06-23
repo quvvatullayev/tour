@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     'tour',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

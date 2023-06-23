@@ -7,8 +7,9 @@ from .models import (
     Commit,
     Appeal,
     Contact,
-    User,
 )
+from django.contrib.auth.models import User
+
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:

@@ -7,7 +7,7 @@ from .models import (
     Commit,
     Appeal,
     Contact,
-    User,
+    
 )
 
 @admin.register(Country)
@@ -45,9 +45,5 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ['area', 'phone_number', 'emile', 'location', 'telegram', 'instagram', 'facebook']
     fields = ['area', 'phone_number', 'emile', 'location', 'telegram', 'instagram', 'facebook']
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'password']
-    fields = ['username', 'password']
 
     
