@@ -113,9 +113,11 @@ urlpatterns += [
 
 from .views.user import (
     CreateUser,
+    LoginUser,
 )
 
 urlpatterns += [
     path('user_create/', CreateUser.as_view()),
+    path('user_login/', LoginUser.as_view()),
 ]
 
